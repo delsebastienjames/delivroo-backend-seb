@@ -451,20 +451,24 @@ app.get("/", (req, res) => {
   });
 });
 
-// Heroku va nous fournir une variable process.env.PORT
-// if (process.env.PORT) {
-//   app.listen(process.env.PORT, () => {
-//     console.log("Server started");
-//   });
-// } else {
-//   app.listen(3200, () => {
-//     console.log("Server started");
-//   });
-// }
 app.all("*", (req, res) => {
   res.status(404).json({ message: "Page not found" });
 });
 
-app.listen(process.env.PORT || 3200, () => {
-  console.log("Server started");
+// Heroku va nous fournir une variable process.env.PORT
+if (process.env.PORT) {
+  app.listen(process.env.PORT, () => {
+    console.log("Server started");
+  });
+} else {
+  app.listen(3100, () => {
+    console.log("Server started");
+  });
+}
+app.all("*", (req, res) => {
+  res.status(404).json({ message: "Page not found" });
 });
+
+// app.listen(process.env.PORT || 3100, () => {
+//   console.log("Server started");
+// });
