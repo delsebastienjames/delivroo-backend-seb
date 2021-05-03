@@ -461,6 +461,9 @@ app.get("/", (req, res) => {
 //     console.log("Server started");
 //   });
 // }
+app.all("*", (req, res) => {
+  res.status(404).json({ message: "Page not found" });
+});
 
 app.listen(process.env.PORT || 3200, () => {
   console.log("Server started");
